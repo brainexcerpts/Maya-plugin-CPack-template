@@ -16,7 +16,7 @@ The windows Installer will make sure Maya is aware of the newly installed plugin
 Generate packages (zip/windows installer)
 ------------------------------------------
 
-This folder contains the files usually present in a Maya plugin and to be replaced by your own files:
+This template project contains the files usually present in a Maya plugin (to be replaced by your own files):
  - /scripts/ contains your mel/python scripts 
  - /prefs/ stores shelves and icons
  - /lib/mayaxxxx/ the plugin executable (.mll)
@@ -37,17 +37,17 @@ you'll find:
 
 - CMakeLists.txt : dummy cmake in order to run CPack and the generation of the documenation with Doxygen
 - cpack_setup.cmake : general CPack definitions to generate the zip file
-- spack_setup_nsis.cmake: specific CPack definitions to generate the NSIS installer
+- cpack_setup_nsis.cmake: specific CPack definitions to generate the NSIS installer
 - doxygen_setup.cmake : CMake instruction to autogenerate the documentation with Doxygen
 
-run_deploy.py simply runs cmake on the /deployement/CMakeLists.txt file. 
+run_deploy.py simply runs cmake with the /deployement/CMakeLists.txt file. 
 
 ---------------
 NSIS installer
 ---------------
 
-The windows installer is a slightly advanced self-extracting executable.
-It will extract every plugin files under: 
+The generated windows installer is simply a slightly advanced self-extracting executable.
+It will self-extract plugin files under: 
 
 	C:\ProgramData\Autodesk\ApplicationPlugins\plugin_name\
 
