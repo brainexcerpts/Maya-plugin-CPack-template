@@ -1,0 +1,13 @@
+code {
+    background-clip: padding-box;
+    background-color: #ebebeb;
+    border-radius: 0.3em;
+    font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace !important;
+    padding: 0 0.25em;
+    white-space: nowrap;
+}
+
+div.contents {
+        max-width: 50em;  
+        text-align: justify;
+}

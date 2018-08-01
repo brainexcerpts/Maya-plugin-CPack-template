@@ -1,0 +1,35 @@
+*.user
+*.svn
+*.fbx
+*.a
+*.o
+*.autosave
+*.swp
+*.deps
+*.suo
+*.sdf
+*.pdb
+*.pyc
+*.mll
+*.ilk
+*.log
+
+#ignores every folders named __pycache__:
+__pycache__/
+build/
+
+#--------
+
+*.vcxproj eol=crlf
+*.vcxproj.filters eol=crlf
+
+#--------
+
+###########################
+#Meta doc
+###########################
+doc/doxygen/html
+doc/doxygen/dox_error.log
+doc/doxygen/html/
+doc/doxygen/latex/
+doc/doxygen/docbook/

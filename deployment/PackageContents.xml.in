@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Cmake template to generate the final PackageContents.xml file.
+    The variables @MY_VAR@ will be replaced by the cmake values set(MY_VAR "value")
+    see "cpack_setup.cmake".
+
+    PackageContents.xml describes the location of our plugin files (.mel/.py/.mll etc.)
+    and update Maya environment variables.
+
+    When PackageContents.xml is present in "C:\ProgramData\Autodesk\ApplicationPlugins\plugin_name"
+    Maya automatically read this file and loads the necessary scripts and file.
+ -->
+
+ <!-- Note: UpgradeCode will be required to sell the plugin on autodesk store. -->
+<ApplicationPackage SchemaVersion="1.0"
+    ProductType="Application"
+
+    AutodeskProduct="Maya"
+    Name="@PROJECT_NAME@"
+    Description="@CPACK_PACKAGE_DESCRIPTION_SUMMARY@"
+    AppVersion="@CPACK_PACKAGE_VERSION@"
+    Author="www.myawsomecompany.com"
+    AppNameSpace="com.namespace.namespace"
+    HelpFile="./@PACKAGE_DOC_PATH@/@PACKAGE_HELP_FILE@"
+    OnlineDocumentation="http://www.notavailable.not/documentation/"
+
+    ProductCode="*"
+    UpgradeCode="{993c3cff-565f-4d19-80cf-36c13168813a}" >
+
+    <CompanyDetails Name="@CPACK_PACKAGE_VENDOR@"
+        Phone=" "
+        Url="@CPACK_PACKAGE_URL@"
+        Email="@CPACK_PACKAGE_CONTACT@" />
+
+    <!-- python scripts, shelves, load script -->
+
+    <!-- Note by default the paths:
+         - MAYA_SCRIPT_PATH  -> Contents/script
+         - PYTHONPATH        -> Contents/script
+         - MAYA_PRESET_PATH  -> Contents/presets
+         - MAYA_PLUG_IN_PATH -> Contents/plug-ins
+         - XBMLANGPATH       -> Contents/icons
+         Will always be defined.
+         On the other hand MAYA_SHELF_PATH is always left untouched
+
+        Note: when setting environment variables the operator "+=" means we
+        use absolute location and "+:=" relative paths
+    -->
+    <Components>
+        <RuntimeRequirements SupportPath="./@PACKAGE_DOC_PATH@" OS="win64" Platform="Maya" SeriesMin="2014" SeriesMax="2014" />
+        <!-- setup MAYA_SHELF_PATH Note that only Maya 2017 and superior properly load the shelves -->
+        <MayaEnv expr="MAYA_SHELF_PATH+:=2014/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2014/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2014/scripts/" />
+        <MayaEnv expr="PYTHONPATH+:=2014/scripts/" />
+        <MayaEnv expr="XBMLANGPATH+:=2014/prefs/icons" />
+        <MayaEnv expr="MAYA_PLUG_IN_PATH+:=2014/plug-ins" />
+        <MayaEnv expr="SWE_SAMPLE_PATH+:=../samples/maya2014" />
+        <!-- Path to our shelf (but it might not be necessary -->
+        <ComponentEntry ModuleName="./Contents/2014/prefs/shelves/shelf_My_awesome_plugin_for_maya.mel" />
+        <!-- Fortunately Every versions of Maya (at least from 2014) always execute the "plug_in_name_load.mel" script
+            (but "plug_in_name" has to match the mll file name. / Actually it might not be related to the mll file name but rather the name we gave in this xml file at Name="" )
+            We can make sure our shelf files are properly loaded in this script.
+            There is no restriction on the xxx_load.mel script as long as it is in the MAYA_SCRIPT_PATH
+        -->
+        <ComponentEntry ModuleName="./Contents/2014/scripts/@PROJECT_NAME@_load.mel" />
+        <!-- You can add AutoLoad="True" here for plugin to autoload -->
+        <ComponentEntry ModuleName="./Contents/2014/plug-ins/@MAYA_PLUGIN_BIN_NAME@.mll" />
+    </Components>
+
+    <!-- From here we simply copy and paste the other Maya versions we support: -->
+    <Components>
+        <RuntimeRequirements SupportPath="./@PACKAGE_DOC_PATH@" OS="win64" Platform="Maya" SeriesMin="2015" SeriesMax="2015" />
+        <MayaEnv expr="MAYA_SHELF_PATH+:=2015/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2015/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2015/scripts/" />
+        <MayaEnv expr="PYTHONPATH+:=2015/scripts/" />
+        <MayaEnv expr="XBMLANGPATH+:=2015/prefs/icons" />
+        <MayaEnv expr="MAYA_PLUG_IN_PATH+:=2015/plug-ins" />
+        <MayaEnv expr="SWE_SAMPLE_PATH+:=../samples/maya2015" />
+        <ComponentEntry ModuleName="./Contents/2015/prefs/shelves/shelf_My_awesome_plugin_for_maya.mel" />
+        <ComponentEntry ModuleName="./Contents/2015/scripts/@PROJECT_NAME@_load.mel" />
+        <ComponentEntry ModuleName="./Contents/2015/plug-ins/@MAYA_PLUGIN_BIN_NAME@.mll" />
+    </Components>
+
+    <Components>
+        <RuntimeRequirements SupportPath="./@PACKAGE_DOC_PATH@" OS="win64" Platform="Maya" SeriesMin="2016" SeriesMax="2016" />
+        <MayaEnv expr="MAYA_SHELF_PATH+:=2016/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2016/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2016/scripts/" />
+        <MayaEnv expr="PYTHONPATH+:=2016/scripts/" />
+        <MayaEnv expr="XBMLANGPATH+:=2016/prefs/icons" />
+        <MayaEnv expr="MAYA_PLUG_IN_PATH+:=2016/plug-ins" />
+        <MayaEnv expr="SWE_SAMPLE_PATH+:=../samples/maya2016" />
+        <ComponentEntry ModuleName="./Contents/2016/prefs/shelves/shelf_My_awesome_plugin_for_maya.mel" />
+        <ComponentEntry ModuleName="./Contents/2016/scripts/@PROJECT_NAME@_load.mel" />
+        <ComponentEntry ModuleName="./Contents/2016/plug-ins/@MAYA_PLUGIN_BIN_NAME@.mll" />
+    </Components>
+
+    <Components>
+        <RuntimeRequirements SupportPath="./@PACKAGE_DOC_PATH@" OS="win64" Platform="Maya" SeriesMin="2016.5" SeriesMax="2016.5" />
+        <MayaEnv expr="MAYA_SHELF_PATH+:=2016.5/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2016.5/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2016.5/scripts/" />
+        <MayaEnv expr="PYTHONPATH+:=2016.5/scripts/" />
+        <MayaEnv expr="XBMLANGPATH+:=2016.5/prefs/icons" />
+        <MayaEnv expr="MAYA_PLUG_IN_PATH+:=2016.5/plug-ins" />
+        <MayaEnv expr="SWE_SAMPLE_PATH+:=../samples/maya2016.5" />
+        <ComponentEntry ModuleName="./Contents/2016.5/prefs/shelves/shelf_My_awesome_plugin_for_maya.mel" />
+        <ComponentEntry ModuleName="./Contents/2016.5/scripts/@PROJECT_NAME@_load.mel" />
+        <ComponentEntry ModuleName="./Contents/2016.5/plug-ins/@MAYA_PLUGIN_BIN_NAME@.mll" />
+    </Components>
+
+    <Components>
+        <RuntimeRequirements SupportPath="./@PACKAGE_DOC_PATH@" OS="win64" Platform="Maya" SeriesMin="2017" SeriesMax="2017" />
+        <MayaEnv expr="MAYA_SHELF_PATH+:=2017/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2017/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2017/scripts/" />
+        <MayaEnv expr="PYTHONPATH+:=2017/scripts/" />
+        <MayaEnv expr="XBMLANGPATH+:=2017/prefs/icons" />
+        <MayaEnv expr="MAYA_PLUG_IN_PATH+:=2017/plug-ins" />
+        <MayaEnv expr="SWE_SAMPLE_PATH+:=../samples/maya2017" />
+        <ComponentEntry ModuleName="./Contents/2017/prefs/shelves/shelf_My_awesome_plugin_for_maya.mel" />
+        <ComponentEntry ModuleName="./Contents/2017/scripts/@PROJECT_NAME@_load.mel" />
+        <ComponentEntry ModuleName="./Contents/2017/plug-ins/@MAYA_PLUGIN_BIN_NAME@.mll" />
+    </Components>
+
+    <Components>
+        <RuntimeRequirements SupportPath="./@PACKAGE_DOC_PATH@" OS="win64" Platform="Maya" SeriesMin="2018" SeriesMax="2018" />
+        <MayaEnv expr="MAYA_SHELF_PATH+:=2018/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2018/prefs/shelves/" />
+        <MayaEnv expr="MAYA_SCRIPT_PATH+:=2018/scripts/" />
+        <MayaEnv expr="PYTHONPATH+:=2018/scripts/" />
+        <MayaEnv expr="XBMLANGPATH+:=2018/prefs/icons" />
+        <MayaEnv expr="MAYA_PLUG_IN_PATH+:=2018/plug-ins" />
+        <MayaEnv expr="SWE_SAMPLE_PATH+:=../samples/maya2018" />
+        <ComponentEntry ModuleName="./Contents/2018/prefs/shelves/shelf_My_awesome_plugin_for_maya.mel" />
+        <ComponentEntry ModuleName="./Contents/2018/scripts/@PROJECT_NAME@_load.mel" />
+        <ComponentEntry ModuleName="./Contents/2018/plug-ins/@MAYA_PLUGIN_BIN_NAME@.mll" />
+    </Components>
+
+</ApplicationPackage>

@@ -1,0 +1,12 @@
+Flag that does not work in Maya 2014:
+
+-highlightColor
+-rotation
+-flipX
+-flipY
+-useAlpha
+-style "shelf" 
+
+* Launch "generate_master_shelf.py" to generate from the Maya 2017 new shelves files
+  (compatible with Maya 2014 and upper versions)
+  (overwrites every shelf files except Maya 2017)

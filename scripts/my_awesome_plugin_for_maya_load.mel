@@ -1,0 +1,35 @@
+// ----------------------------------------------------------------------------
+if( !(`exists "My_awesome_plugin_for_maya_LOAD_MEL"`) ){
+// ----------------------------------------------------------------------------
+
+    // neither xxx_load.mel or userSetup.py will be launched soon enough
+    // to set environment variables with puten() and allow maya to load
+    // shelves.
+    // In addition the standard commands to create and add shelves addNewShelfTab
+    // is pretty cumbersome to use: it writes the shelf file in the user directory.
+
+    // Note that starting maya 2017 when the MAYA_SHELF_PATH is set either through
+    // the PackageContents.xml or the module file plugin.mod then maya loads
+    // correctly the shelf files without the need for the operation below:
+
+    //Check the shelf does not already exists:
+    if ( !`shelfLayout -exists "My_awesome_plugin_for_maya"` )
+    {
+        addNewShelfTab "My_awesome_plugin_for_maya";
+    }
+    // Since the existing shelf might be an old file in the user directory
+    // we override its content just in case:
+
+    // Make sure we erase all the buttons:
+    string $buttons[] = `shelfLayout -query -childArray "My_awesome_plugin_for_maya"`;
+    if( size($buttons) ){
+        deleteUI -control $buttons;
+    }
+
+    // And build them again
+    setParent("My_awesome_plugin_for_maya");
+    shelf_My_awesome_plugin_for_maya;
+
+// ----------------------------------------------------------------------------
+} proc int My_awesome_plugin_for_maya_LOAD_MEL(){ return 0; }
+// ----------------------------------------------------------------------------
