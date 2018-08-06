@@ -26,7 +26,7 @@ In order to automaticaly gather all those files and generate zip/windows install
 
 	# run_deploy.py
 
-(You will need python3)
+(You will need python3, CMake and NSIS installed)
 
 ---------------
 Implementation
